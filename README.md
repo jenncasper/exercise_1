@@ -1,7 +1,7 @@
 # exercise_1
 UCB SRD Exercise1 - part 1
 
-1. Create a folder in your github repository for exercise_1
+1. Create a folder in your github repository for exercise_1//
   1.1. Create a folder under exercise_1 called loading_and_modelling
 
 2. Load the raw data files into HDFS under “/user/w205/hospital_compare” on either your AWS or Vagrant machine
