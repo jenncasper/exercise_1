@@ -18,68 +18,88 @@ hadoop fs -mkdir /user/w205/hospital_compare
 hadoop fs -put ./hospital_data/*.csv /user/w205/hospital_compare
 hadoop fs -ls /user/w205/hospital_compare
 
+# ComplicationsHospital.csv
 
+# do this if the tableproperties isn't available - sed -i 1d ComplicationsHospital.csv
 
-CREATE TABLE temp 
-  ( 
-     name STRING, 
-     id   INT 
-  ) 
-row format delimited fields terminated BY ',' lines terminated BY '\n' 
-tblproperties("skip.header.line.count"="1"); 
-
-load data local inpath '/home/cluster/TestHive.csv' into table db.test;
-
-sed -i 1d ComplicationsHospital.csv
-
-DROPTABLE IF EXISTS ComplicationsHospital;
+DROP TABLE IF EXISTS ComplicationsHospital;
 CREATE EXTERNAL TABLE ComplicationsHospital (
-  Provider_ID INT,
-  Hospital_Name STRING,
+  ProviderID INT,
+  HospitalName STRING,
   Address STRING,
   City STRING,
   State STRING,
   Zip_Code STRING,
-  County_Name STRING,
-  Phone_Number STRING,
-  Measure_Name STRING,
-  Measure_ID STRING,
-  Compared_to_National STRING,
+  CountyName STRING,
+  PhoneNumber STRING,
+  MeasureName STRING,
+  MeasureID STRING,
+  ComparedToNational STRING,
   Denominator INT,
   Score DECIMAL,
-  Lower_Estimate DECIMAL,
-  Higher_Estimate DECIMAL,
+  LowerEstimate DECIMAL,
+  HigherEstimate DECIMAL,
   Footnote STRING,
-  Measure_Start_Date DATE,
-  Measure_End_Date DATE)
+  MeasureStartDate DATE,
+  MeasureEndDate DATE)
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
 WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
 STORED AS TEXTFILE
-LOCATION ‘/user/w205/hospital_compare’;
+LOCATION '/user/w205/hospital_compare'
+tblproperties("skip.header.line.count"="1");
 
+select count(*) from complicationshospital;
+32721
 
+# ComplicationsNational.csv
 
-CREATE EXTERNAL TABLE IF NOT EXISTS Cars(
-  Provider_ID INT,
-  Hospital_Name STRING,
-  Address STRING,
-  City STRING,
-  State STRING,
-  Zip_Code STRING,
-  County_Name STRING,
-  Phone_Number STRING,
-  Measure_Name STRING,
-  Measure_ID STRING,
-  Compared_to_National STRING,
-  Denominator INT,
-  Score DECIMAL,
-  Lower_Estimate DECIMAL,
-  Higher_Estimate DECIMAL,
+DROP TABLE IF EXISTS ComplicationsNational;
+CREATE EXTERNAL TABLE ComplicationsNational (
+  MeasureName STRING,
+  MeasureID STRING,
+  NationalRate DECIMAL,
+  NumberHospitalsWorse INT,
+  NumberHospitalsSame INT,
+  NumberHospitalsBetter INT,
+  NumberHospitalsTooFew INT,
   Footnote STRING,
-  Measure_Start_Date DATE,
-  Measure_End_Date DATE)
-COMMENT 'ComplicationsHospital.csv'
-ROW FORMAT DELIMITED
-FIELDS TERMINATED BY ','
+  MeasureStartDate DATE,
+  MeasureEndDate DATE )
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
+WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
 STORED AS TEXTFILE
-location '/user/<username>/visdata';
+LOCATION '/user/w205/hospital_compare'
+tblproperties("skip.header.line.count"="1");
+
+select count(*) from complicationshospital;
+32721
+
+CREATE DATABASE IF NOT EXISTS lahman;
+
+USE lahman;
+
+CREATE TABLE AllstarFull (playerID string,yearID string,gameNum string,gameID string,teamID string,lgID string,GP string,startingPos string) row format delimited fields terminated by ',' stored as textfile;
+
+LOAD DATA INPATH '/user/bigdataproject/AllstarFull.csv' OVERWRITE INTO TABLE AllstarFull;
+
+SELECT * FROM AllstarFull;
+
+DROP TABLE IF EXISTS ComplicationsNational;
+CREATE EXTERNAL TABLE ComplicationsNational (
+  MeasureName STRING,
+  MeasureID STRING,
+  NationalRate DECIMAL,
+  NumberHospitalsWorse INT,
+  NumberHospitalsSame INT,
+  NumberHospitalsBetter INT,
+  NumberHospitalsTooFew INT,
+  Footnote STRING,
+  MeasureStartDate DATE,
+  MeasureEndDate DATE )
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
+WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
+STORED AS TEXTFILE
+LOCATION 'hdfs://localhost:8020/user/w205/hospital_compare/ComplicationsNational.csv'
+tblproperties("skip.header.line.count"="1");
+
+LOAD DATA INPATH '/user/w205/hospital_compare/ComplicationsNational.csv' OVERWRITE INTO TABLE ComplicationsNational;
