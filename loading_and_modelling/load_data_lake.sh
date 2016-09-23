@@ -30,7 +30,9 @@ tblproperties("skip.header.line.count"="1");
 
 load data local inpath '/home/cluster/TestHive.csv' into table db.test;
 
-DROPTABLE ComplicationsHospital;
+sed -i 1d ComplicationsHospital.csv
+
+DROPTABLE IF EXISTS ComplicationsHospital;
 CREATE EXTERNAL TABLE ComplicationsHospital (
   Provider_ID INT,
   Hospital_Name STRING,
