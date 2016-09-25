@@ -1,7 +1,7 @@
 -- exercise1 
 DROP DATABASE IF EXISTS exercise1;
 CREATE DATABASE exercise1;
-USE exercise;
+USE exercise1;
 
 -- complicationshospital
 DROP TABLE IF EXISTS complicationshospital;
