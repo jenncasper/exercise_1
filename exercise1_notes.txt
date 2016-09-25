@@ -1,6 +1,6 @@
 # moving the data up to AWS local environment
 
-scp -i ~/.ssh/20160905_demo-UCB.pem ./*.csv root@ec2-54-175-135-209.compute-1.amazonaws.com:~/hospital_data
+See load_data_lake.sh and hive_base_ddl.sql
 
 # ER diagrams 
 
