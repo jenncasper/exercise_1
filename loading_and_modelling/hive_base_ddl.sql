@@ -1,5 +1,5 @@
 -- exercise1 
-DROP DATABASE IF EXISTS exercise1;
+DROP DATABASE IF EXISTS exercise1 CASCADE;
 CREATE DATABASE exercise1;
 USE exercise1;
 
