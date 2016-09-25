@@ -1,7 +1,7 @@
 -- exercise1 
-DROP DATABASE IF EXISTS exercise1 CASCADE;
-CREATE DATABASE exercise1;
-USE exercise1;
+DROP DATABASE IF EXISTS jenncasper_exercise1 CASCADE;
+CREATE DATABASE jenncasper_exercise1;
+USE jenncasper_exercise1;
 
 -- complicationshospital
 DROP TABLE IF EXISTS complicationshospital;
