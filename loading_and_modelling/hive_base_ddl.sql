@@ -19,12 +19,13 @@ CREATE EXTERNAL TABLE complicationshospital (
   footnote STRING,
   measurestartdate DATE,
   measureenddate DATE)
+COMMENT 'Hospital-level results for surgical complications measures'
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
 WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
 STORED AS TEXTFILE
 tblproperties("skip.header.line.count"="1");
 LOAD DATA INPATH '/user/w205/hospital_compare/ComplicationsHospital.csv.gz' OVERWRITE INTO TABLE complicationshospital;
-select count(*) from complicationshospital;
+-- select count(*) from complicationshospital;
 -- 32721
 
 -- complicationsnational
@@ -40,12 +41,13 @@ CREATE EXTERNAL TABLE complicationsnational (
   footnote STRING,
   measurestartdate DATE,
   measureenddate DATE )
+COMMENT 'National-level results for surgical complications measures'
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
 WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
 STORED AS TEXTFILE
 tblproperties("skip.header.line.count"="1");
 LOAD DATA INPATH '/user/w205/hospital_compare/ComplicationsNational.csv.gz' OVERWRITE INTO TABLE complicationsnational;
-select count(*) from complicationshospital;
+-- select count(*) from complicationshospital;
 -- 7
 
 -- complicationsstate
@@ -61,12 +63,13 @@ CREATE EXTERNAL TABLE complicationsstate (
   footnote STRING,
   measurestartdate DATE,
   measureenddate DATE )
+COMMENT 'State-level results for surgical complications measures'
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
 WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
 STORED AS TEXTFILE
 tblproperties("skip.header.line.count"="1");
 LOAD DATA INPATH '/user/w205/hospital_compare/ComplicationsState.csv.gz' OVERWRITE INTO TABLE complicationsstate;
-select count(*) from complicationshospital;
+-- select count(*) from complicationshospital;
 -- 392
 
 -- hcahpshospital
@@ -93,12 +96,13 @@ CREATE EXTERNAL TABLE hcahpshospital (
   surveyresponseratepercentfootnote STRING,
   measurestartdate DATE,
   measureenddate DATE )
+COMMENT 'Hospital-level results for the Hospital Consumer Assessment of Healthcare Providers and Systems'
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
 WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
 STORED AS TEXTFILE
 tblproperties("skip.header.line.count"="1");
 LOAD DATA INPATH '/user/w205/hospital_compare/HCAHPSHospital.csv.gz' OVERWRITE INTO TABLE hcahpshospital;
-select count(*) from hcahpshospital;
+-- select count(*) from hcahpshospital;
 -- 204,864
 
 -- HCAHPS National
@@ -111,12 +115,13 @@ CREATE EXTERNAL TABLE hcahpsnational (
   footnote STRING,
   measurestartdate DATE,
   measureenddate DATE )
+COMMENT 'National-level results for the Hospital Consumer Assessment of Healthcare Providers and Systems'
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
 WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
 STORED AS TEXTFILE
 tblproperties("skip.header.line.count"="1");
 LOAD DATA INPATH '/user/w205/hospital_compare/HCAHPSNational.csv.gz' OVERWRITE INTO TABLE hcahpsnational;
-select count(*) from hcahpsnational;
+-- select count(*) from hcahpsnational;
 -- 32
 
 -- hcahpsstate
@@ -130,12 +135,13 @@ CREATE EXTERNAL TABLE hcahpsstate (
   footnote STRING,
   measurestartdate DATE,
   measureenddate DATE )
+COMMENT 'State-level results for the Hospital Consumer Assessment of Healthcare Providers and Systems'
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
 WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
 STORED AS TEXTFILE
 tblproperties("skip.header.line.count"="1");
 LOAD DATA INPATH '/user/w205/hospital_compare/HCAHPSState.csv.gz' OVERWRITE INTO TABLE hcahpsstate;
-select count(*) from hcahpsstate;
+-- select count(*) from hcahpsstate;
 -- 1792
 
 -- hospitalgeneralinfo
@@ -152,12 +158,13 @@ CREATE EXTERNAL TABLE hospitalgeneralinfo (
   hospitaltype STRING,
   hospitalownership STRING,
   emergencyservices STRING )
+COMMENT 'General information on hospitals within the dataset'
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
 WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
 STORED AS TEXTFILE
 tblproperties("skip.header.line.count"="1");
 LOAD DATA INPATH '/user/w205/hospital_compare/HospitalGeneralInformation.csv.gz' OVERWRITE INTO TABLE hospitalgeneralinfo;
-select count(*) from hospitalgeneralinfo;
+-- select count(*) from hospitalgeneralinfo;
 -- 4824
 
 -- measuredates
@@ -169,12 +176,13 @@ CREATE EXTERNAL TABLE measuredates (
   measurestartdate DATE,
   measureendquarter STRING,
   measureenddate DATE )
+COMMENT 'Current collection dates for all measures on Hospital Compare'
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
 WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
 STORED AS TEXTFILE
 tblproperties("skip.header.line.count"="1");
 LOAD DATA INPATH '/user/w205/hospital_compare/MeasureDates.csv.gz' OVERWRITE INTO TABLE measuredates;
-select count(*) from measuredates;
+-- select count(*) from measuredates;
 -- 100
 
 -- readmissionsanddeathshospital
@@ -198,12 +206,13 @@ CREATE EXTERNAL TABLE readmissionsanddeathshospital (
   footnote STRING,
   measurestartdate DATE,
   measureenddate DATE)
+COMMENT 'Hospital-level results for 30-day mortality and readmissions measures'
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
 WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
 STORED AS TEXTFILE
 tblproperties("skip.header.line.count"="1");
 LOAD DATA INPATH '/user/w205/hospital_compare/ReadmissionsandDeathsHospital.csv.gz' OVERWRITE INTO TABLE readmissionsanddeathshospital;
-select count(*) from readmissionsanddeathshospital;
+-- select count(*) from readmissionsanddeathshospital;
 -- 66,990
 
 -- readmissionsanddeathsnational
@@ -219,12 +228,13 @@ CREATE EXTERNAL TABLE readmissionsanddeathsnational (
   footnote STRING,
   measurestartdate DATE,
   measureenddate DATE )
+COMMENT 'National-level results for 30-day mortality and readmissions measures'
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
 WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
 STORED AS TEXTFILE
 tblproperties("skip.header.line.count"="1");
 LOAD DATA INPATH '/user/w205/hospital_compare/ReadmissionsandDeathsNational.csv.gz' OVERWRITE INTO TABLE readmissionsanddeathsnational;
-select count(*) from readmissionsanddeathsnational;
+-- select count(*) from readmissionsanddeathsnational;
 -- 14
 
 -- readmissionsanddeathsstate
@@ -240,12 +250,13 @@ CREATE EXTERNAL TABLE readmissionsanddeathsstate (
   footnote STRING,
   measurestartdate DATE,
   measureenddate DATE )
+COMMENT 'State-level results for 30-day mortality and readmissions measures'
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
 WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
 STORED AS TEXTFILE
 tblproperties("skip.header.line.count"="1");
 LOAD DATA INPATH '/user/w205/hospital_compare/ReadmissionsandDeathsState.csv.gz' OVERWRITE INTO TABLE readmissionsanddeathsstate;
-select count(*) from readmissionsanddeathsstate;
+-- select count(*) from readmissionsanddeathsstate;
 -- 784
 
 -- timelyandeffectivecarehospital
@@ -267,12 +278,13 @@ CREATE EXTERNAL TABLE timelyandeffectivecarehospital (
   footnote STRING,
   measurestartdate DATE,
   measureenddate DATE )
+COMMENT 'Hospital-level results for Process of Care measures'
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
 WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
 STORED AS TEXTFILE
 tblproperties("skip.header.line.count"="1");
 LOAD DATA INPATH '/user/w205/hospital_compare/TimelyandEffectiveCareHospital.csv.gz' OVERWRITE INTO TABLE timelyandeffectivecarehospital;
-select count(*) from timelyandeffectivecarehospital;
+-- select count(*) from timelyandeffectivecarehospital;
 -- 217,821
 
 -- timelyandeffectivecarenational
@@ -286,12 +298,13 @@ CREATE EXTERNAL TABLE timelyandeffectivecarenational (
   footnote STRING,
   measurestartdate DATE,
   measureenddate DATE )
+COMMENT 'National-level results for Process of Care measures'
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
 WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
 STORED AS TEXTFILE
 tblproperties("skip.header.line.count"="1");
 LOAD DATA INPATH '/user/w205/hospital_compare/TimelyandEffectiveCareNational.csv.gz' OVERWRITE INTO TABLE timelyandeffectivecarenational;
-select count(*) from timelyandeffectivecarenational;
+-- select count(*) from timelyandeffectivecarenational;
 -- 78
 
 -- timelyandeffectivecarestate
@@ -305,10 +318,11 @@ CREATE EXTERNAL TABLE timelyandeffectivecarestate (
   footnote STRING,
   measurestartdate DATE,
   measureenddate DATE )
+COMMENT 'State-level results for Process of Care measures'
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
 WITH SERDEPROPERTIES ("separatorChar" = ",", "quoteChar" = '"', "escapeChar" = '\\')
 STORED AS TEXTFILE
 tblproperties("skip.header.line.count"="1");
 LOAD DATA INPATH '/user/w205/hospital_compare/TimelyandEffectiveCareState.csv.gz' OVERWRITE INTO TABLE timelyandeffectivecarestate;
-select count(*) from timelyandeffectivecarestate;
+-- select count(*) from timelyandeffectivecarestate;
 -- 3827
