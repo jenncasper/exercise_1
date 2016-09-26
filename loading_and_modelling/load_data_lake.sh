@@ -3,7 +3,7 @@
 # Manually renamed the files on local machine while looking 
 # through the data dictionary to figure out what files I'd 
 # consider loading. I only included the files I used in the
-# loading_and_modelling\hospital_compare folder on my git
+# loading_and_modelling\hospital_data folder on my git
 # exercise1 project.
 
 ## Copy the files up to the EC2 instance
