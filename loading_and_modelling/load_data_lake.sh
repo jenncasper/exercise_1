@@ -33,3 +33,7 @@ hadoop fs -ls /user/w205/hospital_compare
 
 hive –f ./hive_base_ddl.sql
 
+## Submit via git
+
+# See https://github.com/MIDS-W205/exercise
+
