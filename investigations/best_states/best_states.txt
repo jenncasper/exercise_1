@@ -18,4 +18,6 @@ NV	51	108.57943925233644
 NC	51	107.09861191440139
 CA	51	106.98539599325969
 
+Seven of the top ten states are on the East Coast based on the average procedure scores for hospitals in given states. It may be worthwhile delving further into the best states based on hospital density or population. A state such as CA may be in the top 10 due to sheer size when compared to MA which may have a widely differing profile of population and provider densities.
+
 There are many other ways to define what makes a state the best care provider. In this case, I chose to keep with the definition of high quality that was used for the best hospitals. Thus, states were ranked by high average scores for measures (aka procedures) executed at hospitals within each state. 

@@ -18,4 +18,4 @@ PROVDERID	HOSPITAL NAME	NUM MEASURES	AVG SCORE
 050327	LOMA LINDA UNIVERSITY MEDICAL CENTER	51	124.02222222222223
 330393	UNIVERSITY HOSPITAL ( STONY BROOK )	51	122.57142857142857
 
-There are many other ways to define what makes a hospital the best. In this case, I chose to investigate which hospitals had the most measures (aka procedures) with the highest average score across those procedures. 
+The top ten hospitals were ranked on the same number of measures (aka procedures). Each had 51 unique measures. UNM Hospital came out on top. There are many other ways to define what makes a hospital the best. In this case, I chose to investigate which hospitals had the most measures (aka procedures) with the highest average score across those procedures. 

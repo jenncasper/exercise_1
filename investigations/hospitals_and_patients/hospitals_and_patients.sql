@@ -6,10 +6,14 @@
 
 USE jenncasper_exercise1;
 
-DROP TABLE IF EXISTS query_procedurevariability;
-CREATE TABLE query_procedurevariability AS SELECT measureid, measurename, count(distinct providerid) AS providernum, variance(score) AS variance FROM tmp_timelyandeffectivecarehospital GROUP BY measureid, measurename ORDER BY providernum desc, variance desc LIMIT 10;
+DROP TABLE IF EXISTS query_hospitalsandpatients;
+CREATE TABLE query_hospitalsandpatients AS SELECT providerid, hospitalname, avgscore, variancescore, avg(patientsurveystarrating) AS avgsurvey FROM tmp_hcahpshospitalwithscores GROUP BY providerid, hospitalname, avgscore, variancescore ORDER BY avgscore desc, variancescore desc, avgsurvey desc;
 
-select * from query_procedurevariability;
+select * from query_hospitalsandpatients;
+
+select corr(avgscore, avgsurvey) from query_hospitalsandpatients;
+
+select corr(variancescore, avgsurvey) from query_hospitalsandpatients;
 
 -- REFERENCES
 
@@ -19,3 +23,5 @@ select * from query_procedurevariability;
 -- https://docs.treasuredata.com/articles/hive-aggregate-functions
 -- https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Select#LanguageManualSelect-ALLandDISTINCTClauses
 -- http://www.javatpoint.com/hive-sort-by-order-by
+-- https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF
+-- https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient

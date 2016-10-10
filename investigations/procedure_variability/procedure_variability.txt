@@ -18,4 +18,6 @@ SCIP_VTE_2	Surgery Patients Who Received Appropriate Venous Thromboembolism Prop
 SCIP_INF_3	Prophylactic antibiotics discontinued within 24 hours after surgery end time	4785	21.818817223780563
 SCIP_INF_2	Prophylactic Antibiotic Selection for Surgical Patients	4785	17.352251551548406
 
+The Fibrinolytic Therapy measure was one of the most widely procedures performed across hospitals but also had the greatest variability. Variability rapidly drops with the popular procedures - #10 in the list above has a variance of 17.34. Given levels of variability, it may be worth determining which hospitals perform which procedures well. This would be useful to determine where patients should go given past performance rather than insurance constraints.
+
 The procedure variability between hospitals may be calculated in other ways given intention. However, I interpreted the question as finding the most common measures (aka procedures) based on number of distinct providers with the greatest variance in scores between all providers. 
