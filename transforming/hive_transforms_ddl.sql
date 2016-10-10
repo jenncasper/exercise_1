@@ -332,7 +332,7 @@ LOAD DATA INPATH '/user/w205/hospital_compare/TimelyandEffectiveCareState.csv.gz
 -- select count(*) from timelyandeffectivecarestate;
 -- 3827
 
-—- EXERCISE 1 - Part II (aka Week 6 in exercise pdf)
+—- EXERCISE 1 Part 2 (aka Week 6 in exercise pdf)
 
 —- Questions to answer with transformed data:
 —- What hospitals are models of high-quality care? That is, which hospitals have the most consistently high scores for a variety of procedures.
@@ -428,7 +428,7 @@ INSERT OVERWRITE TABLE tmp_hospitalgeneralinfo
   FROM hospitalgeneralinfo;
 
 
-—- What hospitals are models of high-quality care? That is, which hospitals have the most consistently high scores for a variety of procedures.
+—- Q1 TRANSFORMS - What hospitals are models of high-quality care? That is, which hospitals have the most consistently high scores for a variety of procedures.
 
 DROP TABLE IF EXISTS tmp_timelyandeffectivecarehospital;
 CREATE TABLE tmp_timelyandeffectivecarehospital (
@@ -468,12 +468,17 @@ INSERT OVERWRITE TABLE tmp_timelyandeffectivecarehospital
 DROP TABLE IF EXISTS summary_of_timelyandeffectivecarehospital_hospitalprocedures;
 CREATE TABLE summary_of_timelyandeffectivecarehospital_hospitalprocedures AS SELECT providerid, measureid, score, avg(score) AS avg, max(score) AS max, min(score) AS min FROM tmp_timelyandeffectivecarehospital GROUP BY providerid, measureid, score;
 
+DROP TABLE IF EXISTS query_besthospitals;
+CREATE TABLE query_besthospitals AS SELECT providerid, hospitalname, count(distinct measureid) AS measurenum, avg(score) AS avg FROM tmp_timelyandeffectivecarehospital GROUP BY providerid, hospitalname ORDER BY measurenum desc, avg desc LIMIT 10;
+
 select providerid, measureid, avg(score), count(*) from (
   select providerid, measureid, score from tmp_timelyandeffectivecarehospital
 ) t
 group by providerid, measureid;
 
 insert overwrite local directory '/home/carter/staging' row format delimited fields terminated by ',' select * from hugetable;
+
+SELECT  E.EMP_ID FROM Employee E order BY E.empid;
 
 —- measured, hospital, avg, high, low
 
@@ -581,3 +586,4 @@ Time taken: 55.283 seconds, Fetched: 560 row(s)
 —- http://firebirdsql.org/manual/nullguide-aggrfunc.html
 —- https://docs.treasuredata.com/articles/hive-aggregate-functions
 —- https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Select#LanguageManualSelect-ALLandDISTINCTClauses
+—- http://www.javatpoint.com/hive-sort-by-order-by
