@@ -1,0 +1,23 @@
+States, like hospitals, are ranked according to the number of measures (aka procedures) executed across hospitals and the average score across all hospitals and procedures within the state. The intent was to rank states based on the most granular level of information available on the measures within hospitals. The assumption is that this would provide a more insightful summary of ranked states. Once again, the Timely and Effective Care (Hospital) data set is used for questioning which states are models of high-quality care. The important pieces of information in this case were the state, measureid, and score.
+
+Refer to the best_states.sql for exact query information to run under Hive (hive -f best_states.sql). Note that in order to execute the query, the Hive tables must already be established by hive_base_ddl.sql and hive_transform_ddl.sql. 
+
+The query for best state counts the number of distinct measures (aka procedures) across hospitals in the state and calculates the average score across all measures for every hospital in the state. This provides a summary of the breadth of measures executed at hospitals in each state through the distinct count and the average score. The states are then ranked by highest number of measures and highest average score across those measures. 
+
+The following are the top ten states resulting from the above query:
+
+STATE	NUM MEASURES	AVG SCORE
+DC	51	117.44802867383513
+NJ	51	113.97809637594584
+MD	51	113.71849668386146
+CT	51	112.10120705663881
+NY	51	110.85327710419962
+MA	51	110.70866510538642
+FL	51	108.68243772520758
+NV	51	108.57943925233644
+NC	51	107.09861191440139
+CA	51	106.98539599325969
+
+Seven of the top ten states are on the East Coast based on the average procedure scores for hospitals in given states. It may be worthwhile delving further into the best states based on hospital density or population. A state such as CA may be in the top 10 due to sheer size when compared to MA which may have a widely differing profile of population and provider densities.
+
+There are many other ways to define what makes a state the best care provider. In this case, I chose to keep with the definition of high quality that was used for the best hospitals. Thus, states were ranked by high average scores for measures (aka procedures) executed at hospitals within each state. 

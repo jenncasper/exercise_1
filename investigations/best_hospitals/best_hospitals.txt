@@ -1,0 +1,21 @@
+After a significant amount of time spent exploring the CMS dataset, I chose to focus on using the Timely and Effective Care (Hospital) data set for questioning what hospitals were considered best given high quality scores on a variety of procedures. This CMS data set had already aggregated information about the hospital and measures (aka procedures) surveyed to calculate a score. Condition information is also included. However, the hospital, measure, and score information were the critical pieces of information to answer the question.
+
+Refer to the best_hospitals.sql for exact query information to run under Hive (hive -f best_hospitals.sql). Note that in order to execute the query, the Hive tables must already be established by hive_base_ddl.sql and hive_transform_ddl.sql. 
+
+The query for best hospital counts the number of distinct measures (aka procedures) and calculates the average score across all measures for each hospital. This provides a summary of the breadth of measures through the distinct count and the average score across all measures for a hospital. The hospitals are then ranked by highest number of measures and highest average score across those measures.
+
+The following are the top ten hospitals resulting from the above query:
+
+PROVDERID	HOSPITAL NAME	NUM MEASURES	AVG SCORE
+320001	UNM HOSPITAL	51	137.09756097560975
+450213	UNIVERSITY HEALTH SYSTEM	51	133.54761904761904
+330101	NEW YORK-PRESBYTERIAN HOSPITAL	51	131.97727272727272
+180067	UNIVERSITY OF KENTUCKY HOSPITAL	51	128.37209302325581
+140088	THE UNIVERSITY OF CHICAGO MEDICAL CENTER	51	125.57142857142857
+050599	UNIVERSITY OF CALIFORNIA DAVIS MEDICAL CENTER	51	124.90697674418605
+030064	BANNER-UNIVERSITY MEDICAL CENTER TUCSON CAMPUS	51	124.76744186046511
+220077	BAYSTATE MEDICAL CENTER	51	124.46511627906976
+050327	LOMA LINDA UNIVERSITY MEDICAL CENTER	51	124.02222222222223
+330393	UNIVERSITY HOSPITAL ( STONY BROOK )	51	122.57142857142857
+
+The top ten hospitals were ranked on the same number of measures (aka procedures). Each had 51 unique measures. UNM Hospital came out on top. There are many other ways to define what makes a hospital the best. In this case, I chose to investigate which hospitals had the most measures (aka procedures) with the highest average score across those procedures. 

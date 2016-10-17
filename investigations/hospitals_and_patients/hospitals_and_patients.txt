@@ -1,0 +1,30 @@
+There are procedures that are more complex or more rare than others. One may assume then that some hospitals are better at the complex/rare procedures than other hospitals given higher frequency of practice. There are likely procedures that are quite common place that most any hospital should be able to perform well. The purpose of this investigation is too reveal those complex/rare procedures given variability in score across hospitals. This may or may not have been the intent for the question - which procedures have the greatest variability between hospitals? However, this is my attempt to address the question and the approach can always be corrected.
+
+Rankings for a hospital, variability hospital procedures, and patient survey results may or may not be correlated. This is the purpose of the fourth investigation - to uncover correlation in measures by answering the following question: Are average scores for hospital quality or procedural variability correlated with patient survey responses?
+
+Refer to the hospitals_and_patients.sql for exact query information to run under Hive (hive -f hospitals_and_patients.sql). Note that in order to execute the query, the Hive tables must already be established by hive_base_ddl.sql and hive_transform_ddl.sql.
+
+Additional transformations where required to support this investigation. Not only was the Timely and Effective Care (hospital) data used, but the HCAHPS (hospital) data was as well. The HCAHPS data contained the information regarding patient survey results. Four temp tables were needed to support this investigation: tmp_hcahpshospital, tmp_provideravgscore, tmp_providervarscore, and tmp_hcahpshospitalwithscores. The necessary fields were: providerid, hospitalname, avgscore, variancescore.
+
+The query_hospitalsandpatients table was created to support the correlation queries. This table included the providerid, hospitalname, average hospital score, variance score for hospital measures (aka procedures), and the average survey rating from patients for each provider. The following is an example of the records in the query_hospitalsandpatients table:
+
+PROVIDER ID	HOSPITAL NAME	AVERAGE SCORE	VARIANCE IN PROCEDURE SCORES	AVERAGE PATIENT SURVEY SCORE
+450348	FALLS COMMUNITY HOSPITAL AND CLINIC	218.23076923076923	160921.40828402367	3.5
+051335	BEAR VALLEY COMMUNITY HOSPITAL	175.33333333333334	16417.55555555556	NULL
+400079	HOSP COMUNITARIO BUEN SAMARITANO	167.25	55088.68749999999	NULL
+310002	NEWARK BETH ISRAEL MEDICAL CENTER	157.0	56008.82051282052	2.3333333333333335
+330202	KINGS COUNTY HOSPITAL CENTER	144.07142857142858	40473.9710884354	1.1666666666666667
+450289	HARRIS HEALTH SYSTEM	143.125	32477.709375	3.0
+050060	COMMUNITY REGIONAL MEDICAL CENTER	141.2	35861.26000000001	2.8333333333333335
+210009	JOHNS HOPKINS HOSPITAL, THE	139.23333333333332	34008.64555555555	3.8333333333333335
+140300	PROVIDENT HOSPITAL OF CHICAGO	138.72	17977.321600000003	3.25
+110079	GRADY MEMORIAL HOSPITAL	138.44736842105263	29961.878808864276	2.8333333333333335
+
+The Hive corr() function was used to determine if the average hospital score and the patient survey results were correlated. The corr() function uses the Pearson’s Correlation Coefficient for a pair of columns. The following were the results of the two queries investigating correlation between patient surveys and average hospital score or procedure variance score:
+
+corr(avgscore, avgsurvey) -> -0.3624693769224054
+corr(variancescore, avgsurvey) -> -0.35066721012584395
+
+Neither resulting correlation coefficient is significant. This would indicate that there isn’t a correlation between the patient survey results and average hospital score, nor the patient survey results and the procedure variance score.
+
+Further investigation into the data would be worthwhile to determine any correlation or lack there of with a level of confidence. This investigation was preliminary and served as a means to study the CMS data set using a set of tools and applications.

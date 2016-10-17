@@ -1,0 +1,23 @@
+There are procedures that are more complex or more rare than others. One may assume then that some hospitals are better at the complex/rare procedures than other hospitals given higher frequency of practice. There are likely procedures that are quite common place that most any hospital should be able to perform well. The purpose of this investigation is too reveal those complex/rare procedures given variability in score across hospitals. This may or may not have been the intent for the question - which procedures have the greatest variability between hospitals? However, this is my attempt to address the question and the approach can always be corrected.
+
+Refer to the procedure_variability.sql for exact query information to run under Hive (hive -f procedure_variability.sql). Note that in order to execute the query, the Hive tables must already be established by hive_base_ddl.sql and hive_transform_ddl.sql.
+
+Like the previous two investigations, the Timely and Effective Care (hospital) data is used for its granularity and completeness in information. The necessary data pieces for this investigation include measureid, meansurename, providerid and score. For each measureid and measurename, the number of distinct providers offering the measure is tallied and the score variance across all hospitals is calculated.
+
+The following are the top ten measures (aka procedures) with the greatest number of providers performing the measures and the greatest variance in scores between all providers: 
+
+MEASURE ID	MEASURE NAME	NUM PERFORMING PROVIDERS	SCORE VARIANCE
+AMI_7a	Fibrinolytic Therapy Received Within 30 Minutes Of Hospital Arrival	4785	352.6666666666667
+HF_2	Evaluation of LVS Function	4785	108.40606462202837
+PN_6	Initial antibiotic selection for CAP in immunocompetent patient	4785	86.04221827311699
+AMI_8a	Primary PCI Received Within 90 Minutes of Hospital Arrival	4785	44.816765919245626
+SCIP_INF_1	Prophylactic antibiotic received within 1 hour prior to surgical incision	4785	32.88189497007928
+SCIP_CARD_2	Surgery Patients on a Beta Blocker Prior to Arrival Who Received a Beta Blocker During the Perioperative Period	47832.05561404009449
+SCIP_INF_9	Postoperative Urinary Catheter Removal	4785	23.611219427550818
+SCIP_VTE_2	Surgery Patients Who Received Appropriate Venous Thromboembolism Prophylaxis Within 24 Hours Prior to Surgery to 24 Hours After Surgery	4785	22.018134656657445
+SCIP_INF_3	Prophylactic antibiotics discontinued within 24 hours after surgery end time	4785	21.818817223780563
+SCIP_INF_2	Prophylactic Antibiotic Selection for Surgical Patients	4785	17.352251551548406
+
+The Fibrinolytic Therapy measure was one of the most widely procedures performed across hospitals but also had the greatest variability. Variability rapidly drops with the popular procedures - #10 in the list above has a variance of 17.34. Given levels of variability, it may be worth determining which hospitals perform which procedures well. This would be useful to determine where patients should go given past performance rather than insurance constraints.
+
+The procedure variability between hospitals may be calculated in other ways given intention. However, I interpreted the question as finding the most common measures (aka procedures) based on number of distinct providers with the greatest variance in scores between all providers. 
